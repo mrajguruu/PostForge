@@ -1,0 +1,85 @@
+# PostForge - Apache Configuration
+# Security and Performance Settings
+
+# ============================================
+# Disable Directory Listing
+# ============================================
+Options -Indexes
+
+# ============================================
+# Protect Sensitive Files
+# ============================================
+<FilesMatch "\.(env|log|sql|md|gitignore|gitkeep)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Note: For directory protection (config, includes, logs),
+# create individual .htaccess files in each directory with:
+# Deny from all
+
+# ============================================
+# Security Headers
+# ============================================
+<IfModule mod_headers.c>
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Enable XSS protection
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Prevent clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Remove PHP version from headers
+    Header unset X-Powered-By
+</IfModule>
+
+# ============================================
+# PHP Security Settings
+# ============================================
+<IfModule mod_php7.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value upload_max_filesize 2M
+    php_value post_max_size 2M
+</IfModule>
+
+# ============================================
+# HTTPS Redirect (Uncomment for production)
+# ============================================
+# <IfModule mod_rewrite.c>
+#     RewriteEngine On
+#     RewriteCond %{HTTPS} off
+#     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# ============================================
+# Error Pages (Optional)
+# ============================================
+# ErrorDocument 404 /PostForge/404.php
+# ErrorDocument 403 /PostForge/403.php
+# ErrorDocument 500 /PostForge/500.php
+
+# ============================================
+# Compression (Performance)
+# ============================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# ============================================
+# Browser Caching (Performance)
+# ============================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

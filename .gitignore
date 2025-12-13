@@ -1,0 +1,79 @@
+# PostForge - .gitignore
+
+# ===== Uploaded Files =====
+uploads/posts/*
+uploads/profiles/*
+!uploads/posts/.gitkeep
+!uploads/profiles/.gitkeep
+
+# ===== Configuration Files =====
+config/config.php.local
+*.local.php
+
+# ===== Sensitive Data =====
+.env
+.env.local
+.env.production
+*.key
+*.pem
+*.crt
+
+# ===== IDE and Editor Files =====
+.vscode/
+.idea/
+.claude/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ===== Composer =====
+/vendor/
+composer.lock
+composer.phar
+
+# ===== NPM/Node =====
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# ===== Logs =====
+*.log
+logs/*
+!logs/.gitkeep
+error_log
+access_log
+php-errors.log
+
+# ===== Temporary Files =====
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+*.cache
+
+# ===== Database Backups =====
+*.sql.backup
+*.sql.gz
+backup/
+
+# ===== System Files =====
+Thumbs.db
+.DS_Store
+Desktop.ini
+$RECYCLE.BIN/
+
+# ===== PHP =====
+*.cache
+.phpunit.result.cache
+
+# ===== Session Files =====
+sessions/
+
+# ===== Keep Directories =====
+!uploads/posts/.gitkeep
+!tmp/.gitkeep
