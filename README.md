@@ -1,5 +1,6 @@
 # 📝 PostForge
 
+![PostForge Cover](cover.png)
 <div align="center">
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
@@ -47,7 +48,7 @@ Get PostForge running on your local machine in under a minute - **no configurati
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/PostForge.git
+git clone https://github.com/mrajguruu/PostForge.git
 cd PostForge
 
 # 2. Create database
@@ -826,11 +827,9 @@ MIT License - Copyright (c) 2025 PostForge
 
 ## 📞 Contact & Links
 
-**Developer:** Your Name
-- **Portfolio:** https://yourportfolio.com
-- **LinkedIn:** https://linkedin.com/in/yourprofile
-- **GitHub:** https://github.com/yourusername
-- **Email:** your.email@example.com
+**Developer:** Mohit Rajguru
+- **LinkedIn:** https://www.linkedin.com/in/mohitrajguru
+- **GitHub:** https://github.com/mrajguruu
 
 **Project Links:**
 - **Repository:** https://github.com/yourusername/PostForge
