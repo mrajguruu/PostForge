@@ -18,10 +18,20 @@ if (isset($_GET['delete'])) {
     try {
         $db = getDB();
 
-        // Get post image to delete
-        $stmt = $db->prepare("SELECT featured_image FROM posts WHERE id = :id");
+        // Check if this is demo data
+        $stmt = $db->prepare("SELECT featured_image, is_demo FROM posts WHERE id = :id");
         $stmt->execute(['id' => $postId]);
         $post = $stmt->fetch();
+
+        // Block deletion of demo content
+        if ($post && $post['is_demo'] == 1) {
+            redirect('posts.php', 'Cannot delete demo content. Feel free to create your own posts to test the delete functionality!', 'warning');
+        }
+
+        // Check if user created this post in current session
+        if (!isset($_SESSION['user_created_posts']) || !in_array($postId, $_SESSION['user_created_posts'])) {
+            redirect('posts.php', 'You can only delete posts you created in this session', 'warning');
+        }
 
         if ($post && $post['featured_image']) {
             deleteUploadedFile($post['featured_image']);
@@ -30,6 +40,9 @@ if (isset($_GET['delete'])) {
         // Delete post
         $deleteStmt = $db->prepare("DELETE FROM posts WHERE id = :id");
         $deleteStmt->execute(['id' => $postId]);
+
+        // Remove from session tracking
+        $_SESSION['user_created_posts'] = array_diff($_SESSION['user_created_posts'], [$postId]);
 
         redirect('posts.php', 'Post deleted successfully', 'success');
     } catch (PDOException $e) {
@@ -162,7 +175,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'published_at' => $status === 'published' ? date('Y-m-d H:i:s') : null
                 ]);
 
-                redirect('posts.php', 'Post created successfully!', 'success');
+                // Track user-created post in session
+                $newPostId = $db->lastInsertId();
+                if (!isset($_SESSION['user_created_posts'])) {
+                    $_SESSION['user_created_posts'] = [];
+                }
+                $_SESSION['user_created_posts'][] = $newPostId;
+
+                redirect('posts.php', 'Post created successfully! This is a temporary post that will be removed when you close your browser.', 'success');
             }
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {

@@ -37,6 +37,21 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
                 break;
 
             case 'delete':
+                // Check if this is demo data
+                $checkStmt = $db->prepare("SELECT is_demo FROM comments WHERE id = :id");
+                $checkStmt->execute(['id' => $commentId]);
+                $comment = $checkStmt->fetch();
+
+                // Block deletion of demo content
+                if ($comment && $comment['is_demo'] == 1) {
+                    redirect('comments.php', 'Cannot delete demo comments. Comments from site visitors will be deletable!', 'warning');
+                }
+
+                // Check if user created this comment (future feature - for now allow all non-demo)
+                // if (!isset($_SESSION['user_created_comments']) || !in_array($commentId, $_SESSION['user_created_comments'])) {
+                //     redirect('comments.php', 'You can only delete comments created in this session', 'warning');
+                // }
+
                 $stmt = $db->prepare("DELETE FROM comments WHERE id = :id");
                 $stmt->execute(['id' => $commentId]);
                 redirect('comments.php', 'Comment deleted', 'success');

@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS categories (
     name VARCHAR(100) UNIQUE NOT NULL,
     slug VARCHAR(100) UNIQUE NOT NULL,
     description TEXT,
+    is_demo TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_slug (slug)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -50,6 +51,7 @@ CREATE TABLE IF NOT EXISTS posts (
     author_id INT,
     status ENUM('draft', 'published') DEFAULT 'draft',
     views INT DEFAULT 0,
+    is_demo TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     published_at TIMESTAMP NULL,
@@ -74,6 +76,7 @@ CREATE TABLE IF NOT EXISTS comments (
     author_email VARCHAR(100) NOT NULL,
     content TEXT NOT NULL,
     status ENUM('pending', 'approved', 'spam') DEFAULT 'pending',
+    is_demo TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     INDEX idx_post (post_id),
@@ -91,15 +94,15 @@ INSERT INTO admins (username, email, password, full_name) VALUES
 ('admin', 'admin@blog.com', '$2y$10$f.s0Tb9f5oDpJ9HGAN8AX.chQn46O/cbFqCtJfwFAzLR9YYc6WGEe', 'Admin User');
 
 -- Insert demo categories
-INSERT INTO categories (name, slug, description) VALUES
-('Technology', 'technology', 'All about technology, programming, and software development'),
-('Travel', 'travel', 'Travel guides, tips, and destination reviews'),
-('Food & Recipe', 'food-recipe', 'Delicious recipes and cooking tips'),
-('Lifestyle', 'lifestyle', 'Lifestyle, health, and wellness articles'),
-('Business', 'business', 'Business insights, entrepreneurship, and career advice');
+INSERT INTO categories (name, slug, description, is_demo) VALUES
+('Technology', 'technology', 'All about technology, programming, and software development', 1),
+('Travel', 'travel', 'Travel guides, tips, and destination reviews', 1),
+('Food & Recipe', 'food-recipe', 'Delicious recipes and cooking tips', 1),
+('Lifestyle', 'lifestyle', 'Lifestyle, health, and wellness articles', 1),
+('Business', 'business', 'Business insights, entrepreneurship, and career advice', 1);
 
 -- Insert demo posts
-INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, author_id, status, views, published_at) VALUES
+INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, author_id, status, views, is_demo, published_at) VALUES
 (
     'Getting Started with Web Development',
     'getting-started-with-web-development',
@@ -110,6 +113,7 @@ INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, a
     1,
     'published',
     1234,
+    1,
     NOW()
 ),
 (
@@ -122,6 +126,7 @@ INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, a
     1,
     'published',
     856,
+    1,
     NOW()
 ),
 (
@@ -134,6 +139,7 @@ INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, a
     1,
     'published',
     542,
+    1,
     NOW()
 ),
 (
@@ -146,15 +152,16 @@ INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, a
     1,
     'draft',
     0,
+    1,
     NULL
 );
 
 -- Insert demo comments
-INSERT INTO comments (post_id, author_name, author_email, content, status) VALUES
-(1, 'John Doe', 'john@example.com', 'Great article! Very helpful for beginners. I especially liked the section on JavaScript frameworks.', 'approved'),
-(1, 'Jane Smith', 'jane@example.com', 'Thanks for sharing this comprehensive guide. Could you recommend some resources for learning CSS Grid?', 'approved'),
-(2, 'Mike Johnson', 'mike@example.com', 'I visited Paris last year and it was amazing! Your description captures it perfectly.', 'approved'),
-(3, 'Sarah Williams', 'sarah@example.com', 'I tried the overnight oats recipe and it''s delicious! Adding some honey made it even better.', 'pending');
+INSERT INTO comments (post_id, author_name, author_email, content, status, is_demo) VALUES
+(1, 'John Doe', 'john@example.com', 'Great article! Very helpful for beginners. I especially liked the section on JavaScript frameworks.', 'approved', 1),
+(1, 'Jane Smith', 'jane@example.com', 'Thanks for sharing this comprehensive guide. Could you recommend some resources for learning CSS Grid?', 'approved', 1),
+(2, 'Mike Johnson', 'mike@example.com', 'I visited Paris last year and it was amazing! Your description captures it perfectly.', 'approved', 1),
+(3, 'Sarah Williams', 'sarah@example.com', 'I tried the overnight oats recipe and it''s delicious! Adding some honey made it even better.', 'pending', 1);
 
 -- =============================================
 -- End of Schema

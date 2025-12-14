@@ -31,11 +31,20 @@
 - **Email:** `admin@blog.com`
 - **Password:** `admin123`
 
-> **Note:** This is a demonstration environment. Some features may have limited functionality on free hosting.
+### 🛡️ Demo Mode Protection
+
+PostForge features a smart demo mode that protects showcase content while allowing full CRUD testing:
+
+- ✅ **Protected Demo Data:** Existing posts and categories cannot be deleted
+- ✅ **Full CRUD Testing:** Create your own posts/categories to test all features
+- ✅ **Session-Based Isolation:** Your content is isolated from other visitors
+- ✅ **Auto-Cleanup:** Temporary content automatically removed after 24 hours
+
+> **Try it:** Attempt to delete a demo post, then create your own and delete it! Your changes won't affect other visitors.
 
 **What you can explore:**
 - ✅ Admin dashboard with real-time analytics
-- ✅ Create, edit, and manage blog posts
+- ✅ Create, edit, and manage blog posts (with demo mode protection)
 - ✅ Category and comment management
 - ✅ Profile settings with image upload
 - ✅ Security features (rate limiting - try 5 wrong passwords!)
@@ -197,6 +206,7 @@ mysql -u root -p blog_management < sql/database.sql
   - Bulk actions support
   - Image preview before upload
   - Responsive table layout
+  - Demo mode protection (session-based content isolation)
 
 ### 📁 Category Management
 - Create and manage post categories
@@ -698,6 +708,26 @@ session_regenerate_id(true);
 - File size limits (2MB maximum)
 - Random filename generation
 - Extension whitelist
+
+### 7. Demo Mode Protection
+```php
+// Protect demo data from deletion
+if ($post['is_demo'] == 1) {
+    redirect('posts.php', 'Cannot delete demo content...', 'warning');
+}
+
+// Session-based content isolation
+$_SESSION['user_created_posts'][] = $newPostId;
+
+// Auto-cleanup temporary content
+DELETE FROM posts WHERE is_demo = 0 AND created_at < DATE_SUB(NOW(), INTERVAL 24 HOUR);
+```
+
+**Features:**
+- Session-based temporary content tracking
+- Protected demo data (cannot be deleted by visitors)
+- Auto-cleanup of visitor-created content after 24 hours
+- Content isolation between different users
 
 ---
 

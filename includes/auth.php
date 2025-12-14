@@ -33,3 +33,25 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 
 // Update last activity time
 $_SESSION['last_activity'] = time();
+
+// Auto-cleanup: Remove temporary user-created content older than 24 hours
+// This runs once per session to clean up abandoned temporary content
+if (!isset($_SESSION['cleanup_done'])) {
+    try {
+        require_once __DIR__ . '/../config/database.php';
+        $db = getDB();
+
+        // Delete non-demo posts older than 24 hours
+        $db->exec("DELETE FROM posts WHERE is_demo = 0 AND created_at < DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+
+        // Delete non-demo categories older than 24 hours (only if they have no posts)
+        $db->exec("DELETE FROM categories WHERE is_demo = 0 AND created_at < DATE_SUB(NOW(), INTERVAL 24 HOUR) AND id NOT IN (SELECT DISTINCT category_id FROM posts WHERE category_id IS NOT NULL)");
+
+        // Delete non-demo comments older than 24 hours
+        $db->exec("DELETE FROM comments WHERE is_demo = 0 AND created_at < DATE_SUB(NOW(), INTERVAL 24 HOUR)");
+
+        $_SESSION['cleanup_done'] = true;
+    } catch (Exception $e) {
+        // Silent fail - cleanup is not critical
+    }
+}

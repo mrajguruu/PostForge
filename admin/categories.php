@@ -32,7 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'description' => $description
             ]);
 
-            redirect('categories.php', 'Category added successfully!', 'success');
+            // Track user-created category in session
+            $newCategoryId = $db->lastInsertId();
+            if (!isset($_SESSION['user_created_categories'])) {
+                $_SESSION['user_created_categories'] = [];
+            }
+            $_SESSION['user_created_categories'][] = $newCategoryId;
+
+            redirect('categories.php', 'Category added successfully! This is a temporary category that will be removed when you close your browser.', 'success');
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
                 redirect('categories.php', 'Category already exists', 'error');
@@ -74,6 +81,21 @@ if (isset($_GET['delete'])) {
     try {
         $db = getDB();
 
+        // Check if this is demo data
+        $stmt = $db->prepare("SELECT is_demo FROM categories WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        $category = $stmt->fetch();
+
+        // Block deletion of demo content
+        if ($category && $category['is_demo'] == 1) {
+            redirect('categories.php', 'Cannot delete demo categories. Feel free to create your own categories to test the delete functionality!', 'warning');
+        }
+
+        // Check if user created this category in current session
+        if (!isset($_SESSION['user_created_categories']) || !in_array($id, $_SESSION['user_created_categories'])) {
+            redirect('categories.php', 'You can only delete categories you created in this session', 'warning');
+        }
+
         // Check if category has posts
         $checkStmt = $db->prepare("SELECT COUNT(*) as count FROM posts WHERE category_id = :id");
         $checkStmt->execute(['id' => $id]);
@@ -86,6 +108,9 @@ if (isset($_GET['delete'])) {
         // Delete category
         $deleteStmt = $db->prepare("DELETE FROM categories WHERE id = :id");
         $deleteStmt->execute(['id' => $id]);
+
+        // Remove from session tracking
+        $_SESSION['user_created_categories'] = array_diff($_SESSION['user_created_categories'], [$id]);
 
         redirect('categories.php', 'Category deleted successfully!', 'success');
     } catch (PDOException $e) {
