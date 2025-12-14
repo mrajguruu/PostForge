@@ -165,7 +165,7 @@ mysql -u root -p blog_management < sql/database.sql
 ### 📊 Technical Metrics
 - **Lines of Code:** 3,500+
 - **Security Features:** 10+
-- **PHP Files:** 20
+- **PHP Files:** 21
 - **Database Tables:** 4 (normalized design)
 - **Security Score:** A+ Grade
 
