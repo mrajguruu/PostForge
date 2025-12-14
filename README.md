@@ -445,7 +445,7 @@ Before you begin, ensure you have the following installed:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/PostForge.git
+git clone https://github.com/mrajguruu/PostForge.git
 cd PostForge
 ```
 
@@ -853,8 +853,8 @@ MIT License - Copyright (c) 2025 PostForge
 - **GitHub:** https://github.com/mrajguruu
 
 **Project Links:**
-- **Repository:** https://github.com/yourusername/PostForge
-- **Issues:** https://github.com/yourusername/PostForge/issues
+- **Repository:** https://github.com/mrajguruu/PostForge
+- **Issues:** https://github.com/mrajguruu/PostForge/issues
 - **Documentation:** [README.md](README.md), [SECURITY.md](SECURITY.md), [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
 
 ---

@@ -5,6 +5,7 @@ uploads/posts/*
 uploads/profiles/*
 !uploads/posts/.gitkeep
 !uploads/profiles/.gitkeep
+!uploads/posts/*-demo.*
 
 # ===== Configuration Files =====
 config/config.php.local

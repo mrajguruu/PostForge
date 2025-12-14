@@ -99,12 +99,13 @@ INSERT INTO categories (name, slug, description) VALUES
 ('Business', 'business', 'Business insights, entrepreneurship, and career advice');
 
 -- Insert demo posts
-INSERT INTO posts (title, slug, content, excerpt, category_id, author_id, status, views, published_at) VALUES
+INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, author_id, status, views, published_at) VALUES
 (
     'Getting Started with Web Development',
     'getting-started-with-web-development',
     '<h2>Introduction to Web Development</h2><p>Web development is an exciting field that combines creativity with technical skills. In this comprehensive guide, we''ll explore the fundamental technologies you need to know to become a successful web developer.</p><h3>HTML: The Foundation</h3><p>HTML (HyperText Markup Language) is the backbone of every website. It provides structure and meaning to web content through various tags and elements.</p><h3>CSS: Making it Beautiful</h3><p>CSS (Cascading Style Sheets) transforms plain HTML into visually appealing designs. Learn about layouts, colors, typography, and responsive design.</p><h3>JavaScript: Adding Interactivity</h3><p>JavaScript brings websites to life with dynamic behavior and interactive features. Master the fundamentals and explore modern frameworks.</p>',
     'Learn the essential technologies and skills needed to start your journey in web development.',
+    'webdevelopment.webp',
     1,
     1,
     'published',
@@ -116,6 +117,7 @@ INSERT INTO posts (title, slug, content, excerpt, category_id, author_id, status
     '10-must-visit-destinations-europe',
     '<h2>Explore the Best of Europe</h2><p>Europe offers incredible diversity in culture, history, and natural beauty. Here are ten destinations that should be on every traveler''s bucket list.</p><h3>1. Paris, France</h3><p>The City of Light captivates with its iconic landmarks, world-class museums, and romantic atmosphere.</p><h3>2. Rome, Italy</h3><p>Step back in time and explore ancient ruins, Renaissance art, and incredible Italian cuisine.</p><h3>3. Barcelona, Spain</h3><p>Discover Gaudí''s architectural masterpieces and enjoy the vibrant Mediterranean culture.</p>',
     'Discover the most beautiful and culturally rich destinations across Europe.',
+    'europe-travel-demo.webp',
     2,
     1,
     'published',
@@ -127,6 +129,7 @@ INSERT INTO posts (title, slug, content, excerpt, category_id, author_id, status
     'healthy-breakfast-recipes',
     '<h2>Start Your Day Right</h2><p>A nutritious breakfast sets the tone for the entire day. These recipes are not only healthy but also delicious and easy to prepare.</p><h3>Overnight Oats</h3><p>Combine oats, milk, chia seeds, and your favorite fruits in a jar. Refrigerate overnight and enjoy a ready-made breakfast.</p><h3>Avocado Toast</h3><p>Mash ripe avocado on whole grain toast, add a poached egg, and season with salt, pepper, and red pepper flakes.</p>',
     'Quick and nutritious breakfast ideas to energize your mornings.',
+    'breakfast-recipe-demo.webp',
     3,
     1,
     'published',
@@ -138,6 +141,7 @@ INSERT INTO posts (title, slug, content, excerpt, category_id, author_id, status
     'work-life-balance-modern-world',
     '<h2>Finding Balance</h2><p>In today''s fast-paced world, maintaining a healthy work-life balance is more important than ever. Here''s how to achieve it.</p><h3>Set Boundaries</h3><p>Learn to separate work time from personal time. Turn off notifications after hours and create a dedicated workspace.</p><h3>Prioritize Self-Care</h3><p>Regular exercise, adequate sleep, and mindfulness practices are essential for mental and physical well-being.</p>',
     'Strategies for maintaining balance between professional and personal life.',
+    'work-life-balance-demo.webp',
     4,
     1,
     'draft',
