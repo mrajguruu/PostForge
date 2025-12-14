@@ -17,14 +17,35 @@
 
 > 🎓 **Portfolio Project** - This project demonstrates full-stack PHP development, enterprise-grade security practices, and modern web application architecture. Built to showcase professional-level coding standards and security awareness.
 
-[Quick Start](#-quick-start-60-seconds) • [Features](#-features) • [Screenshots](#-screenshots) • [Tech Stack](#-tech-stack) • [Security](#-security)
+[🌐 Live Demo](#-live-demo) • [Quick Start](#-quick-start-60-seconds) • [Features](#-features) • [Screenshots](#-screenshots) • [Tech Stack](#-tech-stack) • [Security](#-security)
 
 </div>
 
 ---
 
+## 🌐 Live Demo
+
+**Try PostForge live:** [https://postforge.infinityfreeapp.me](https://postforge.infinityfreeapp.me)
+
+**Demo Credentials:**
+- **Email:** `admin@blog.com`
+- **Password:** `admin123`
+
+> **Note:** This is a demonstration environment. Some features may have limited functionality on free hosting.
+
+**What you can explore:**
+- ✅ Admin dashboard with real-time analytics
+- ✅ Create, edit, and manage blog posts
+- ✅ Category and comment management
+- ✅ Profile settings with image upload
+- ✅ Security features (rate limiting - try 5 wrong passwords!)
+- ✅ Responsive design on mobile and desktop
+
+---
+
 ## 📋 Table of Contents
 
+- [Live Demo](#-live-demo)
 - [Quick Start (60 seconds)](#-quick-start-60-seconds)
 - [Screenshots](#-screenshots)
 - [Overview](#-overview)

@@ -2,9 +2,8 @@
 -- Blog Management System - Database Schema
 -- =============================================
 
--- Create Database
-CREATE DATABASE IF NOT EXISTS blog_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE blog_management;
+-- Note: Database already created via hosting control panel
+-- USE statement removed for hosting compatibility
 
 -- =============================================
 -- Table: admins

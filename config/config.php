@@ -5,20 +5,36 @@
  */
 
 // Environment Configuration
-// Set to 'production' when deploying to live server
-define('ENVIRONMENT', getenv('APP_ENV') ?: 'development');
+// Automatically detect environment based on hostname
+$isProduction = (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'infinityfree') !== false);
+define('ENVIRONMENT', $isProduction ? 'production' : 'development');
 
 // Site Configuration
-define('SITE_NAME', getenv('SITE_NAME') ?: 'PostForge');
-define('SITE_URL', getenv('SITE_URL') ?: 'http://localhost/PostForge');
-define('ADMIN_EMAIL', getenv('ADMIN_EMAIL') ?: 'admin@postforge.com');
+if (ENVIRONMENT === 'production') {
+    define('SITE_NAME', 'PostForge');
+    define('SITE_URL', 'http://your-subdomain.infinityfreeapp.me');  // ← PLACEHOLDER: Change to your hosting URL
+    define('ADMIN_EMAIL', 'admin@postforge.com');
+} else {
+    define('SITE_NAME', getenv('SITE_NAME') ?: 'PostForge');
+    define('SITE_URL', getenv('SITE_URL') ?: 'http://localhost/PostForge');
+    define('ADMIN_EMAIL', getenv('ADMIN_EMAIL') ?: 'admin@postforge.com');
+}
 
 // Database Configuration
-// Use environment variables in production, fallback to defaults for development
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: 'blog_management');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
+if (ENVIRONMENT === 'production') {
+    // Production: Hosting Database Credentials
+    // ⚠️ PLACEHOLDER VALUES - Replace with your actual hosting credentials
+    define('DB_HOST', 'sqlXXX.infinityfree.com');         // ← Your MySQL hostname
+    define('DB_NAME', 'your_database_name');              // ← Your database name
+    define('DB_USER', 'your_database_user');              // ← Your database username
+    define('DB_PASS', 'YOUR_DATABASE_PASSWORD');          // ← Your database password
+} else {
+    // Development: Local Database (XAMPP/WAMP)
+    define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+    define('DB_NAME', getenv('DB_NAME') ?: 'blog_management');
+    define('DB_USER', getenv('DB_USER') ?: 'root');
+    define('DB_PASS', getenv('DB_PASS') ?: '');
+}
 define('DB_CHARSET', 'utf8mb4');
 
 // Upload Configuration
@@ -41,10 +57,11 @@ define('SESSION_TIMEOUT', 3600); // 1 hour in seconds
 define('CSRF_TOKEN_NAME', 'csrf_token');
 
 // Date & Time
-// IMPORTANT: Set this to match your server's timezone
-// Common timezones: 'Asia/Kolkata', 'America/New_York', 'Europe/London', 'UTC'
-// This should match your MySQL server timezone for accurate time calculations
-date_default_timezone_set(getenv('TIMEZONE') ?: 'Asia/Kolkata');
+if (ENVIRONMENT === 'production') {
+    date_default_timezone_set('UTC');
+} else {
+    date_default_timezone_set(getenv('TIMEZONE') ?: 'Asia/Kolkata');
+}
 
 // Error Reporting & Logging
 if (ENVIRONMENT === 'production') {

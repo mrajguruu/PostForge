@@ -8,7 +8,11 @@ uploads/profiles/*
 
 # ===== Configuration Files =====
 config/config.php.local
+config/config.production.php
+config/config.local.php
+config/README.md
 *.local.php
+*.production.php
 
 # ===== Sensitive Data =====
 .env
