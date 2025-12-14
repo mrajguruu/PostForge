@@ -105,7 +105,7 @@ INSERT INTO posts (title, slug, content, excerpt, featured_image, category_id, a
     'getting-started-with-web-development',
     '<h2>Introduction to Web Development</h2><p>Web development is an exciting field that combines creativity with technical skills. In this comprehensive guide, we''ll explore the fundamental technologies you need to know to become a successful web developer.</p><h3>HTML: The Foundation</h3><p>HTML (HyperText Markup Language) is the backbone of every website. It provides structure and meaning to web content through various tags and elements.</p><h3>CSS: Making it Beautiful</h3><p>CSS (Cascading Style Sheets) transforms plain HTML into visually appealing designs. Learn about layouts, colors, typography, and responsive design.</p><h3>JavaScript: Adding Interactivity</h3><p>JavaScript brings websites to life with dynamic behavior and interactive features. Master the fundamentals and explore modern frameworks.</p>',
     'Learn the essential technologies and skills needed to start your journey in web development.',
-    'webdevelopment.webp',
+    'web-development-demo.webp',
     1,
     1,
     'published',
