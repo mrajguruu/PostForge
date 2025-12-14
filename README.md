@@ -25,7 +25,7 @@
 
 ## 🌐 Live Demo
 
-**Try PostForge live:** [https://postforge.infinityfreeapp.me](https://postforge.infinityfreeapp.me)
+**Try PostForge live:** [https://postforge.infinityfree.me](https://postforge.infinityfree.me)
 
 **Demo Credentials:**
 - **Email:** `admin@blog.com`
