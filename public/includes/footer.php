@@ -38,12 +38,12 @@
                 <div class="col-md-4 mb-3">
                     <h6>Built By</h6>
                     <p class="text-muted mb-2">Mohit Rajguru</p>
-                    <div class="social-links">
-                        <a href="https://github.com/mrajguruu" target="_blank" rel="noopener noreferrer" class="text-white me-3" title="GitHub">
-                            <i class="bi bi-github fs-5"></i>
+                    <div class="social-links d-flex align-items-center">
+                        <a href="https://github.com/mrajguruu" target="_blank" rel="noopener noreferrer" class="text-white me-3 fs-4" title="GitHub" style="text-decoration: none;">
+                            <i class="bi bi-github"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/mohitrajguru" target="_blank" rel="noopener noreferrer" class="text-white me-3" title="LinkedIn">
-                            <i class="bi bi-linkedin fs-5"></i>
+                        <a href="https://www.linkedin.com/in/mohitrajguru" target="_blank" rel="noopener noreferrer" class="text-white fs-4" title="LinkedIn" style="text-decoration: none;">
+                            <i class="bi bi-linkedin"></i>
                         </a>
                     </div>
                 </div>
